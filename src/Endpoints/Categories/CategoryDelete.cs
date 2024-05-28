@@ -5,7 +5,7 @@ namespace OrderAPI.Endpoints.Categories;
 
 public class CategoryDelete
 {
-    public static string Template => "/category/{id}";
+    public static string Template => "/category/{id:guid}";
     public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
     public static Delegate Handle => Action;
 
@@ -15,7 +15,7 @@ public class CategoryDelete
 
         if(category == null)
         {
-            return Results.BadRequest();
+            return Results.NotFound($"{id} not found");
         }
         else
         {

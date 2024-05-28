@@ -20,12 +20,7 @@ public abstract class Entity : Notifiable<Notification>
 
     protected void Validate()
     {
-        var contract = new Contract<Category>()
-                    .IsNotNullOrEmpty(Name, "Name", "Name is Required")
-                    .IsGreaterOrEqualsThan(Name, 3, "Name")
-                    .IsNotNullOrEmpty(CreatedBy, "CreatedBy", "Created By is Required")
-                    .IsNotNullOrEmpty(EditedBy, "EditedBy", "Edited By is Required");
-        AddNotifications(contract);
+        
     }
 
     protected void EditInfo()

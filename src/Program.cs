@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Identity;
 using OrderAPI.Endpoints.Categories;
+using OrderAPI.Endpoints.Employees;
 using OrderAPI.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSqlServer<AppDbContext>(builder.Configuration["ConnectionStrings:OrderDB"]);
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -22,6 +25,7 @@ app.MapMethods(CategoryPost.Template, CategoryPost.Methods, CategoryPost.Handle)
 app.MapMethods(CategoryGetAll.Template,CategoryGetAll.Methods, CategoryGetAll.Handle);
 app.MapMethods(CategoryPut.Template, CategoryPut.Methods, CategoryPut.Handle);
 app.MapMethods(CategoryDelete.Template, CategoryDelete.Methods, CategoryDelete.Handle);
+app.MapMethods(EmployeePost.Template, EmployeePost.Methods, EmployeePost.Handle);
 
 app.Run();
 

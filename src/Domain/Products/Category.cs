@@ -20,6 +20,16 @@ public class Category : Entity
 
     }
 
+    public void Validate()
+    {
+        var contract = new Contract<Category>()
+                    .IsNotNullOrEmpty(Name, "Name", "Name is Required")
+                    .IsGreaterOrEqualsThan(Name, 3, "Name")
+                    .IsNotNullOrEmpty(CreatedBy, "CreatedBy", "Created By is Required")
+                    .IsNotNullOrEmpty(EditedBy, "EditedBy", "Edited By is Required");
+        AddNotifications(contract);
+    }
+
     public void EditInfo(string name, bool active)
     {
         Name = name;
