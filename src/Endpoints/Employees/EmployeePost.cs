@@ -16,7 +16,7 @@ public class EmployeePost
 
         if (!result.Succeeded)
         {
-            return Results.BadRequest(result.Errors.FirstOrDefault());
+            return Results.ValidationProblem(result.Errors.ConvertToProblemaDetails());
         }
 
         var userClaims = new List<Claim>()
@@ -29,7 +29,7 @@ public class EmployeePost
 
         if (!resultClaim.Succeeded)
         {
-            return Results.BadRequest(resultClaim.Errors.FirstOrDefault());
+            return Results.BadRequest(resultClaim.Errors.ConvertToProblemaDetails());
         }
         
         return Results.Created($"/employee/{user.Id}", user.Id);
